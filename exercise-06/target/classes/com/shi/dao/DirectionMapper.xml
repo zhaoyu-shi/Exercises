@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shi.dao.DirectionMapper">
+
+    <!--按结果嵌套查询-->
+    <select id="getDirection" resultMap="DirectionStudent">
+        select d.id did,d.name dname,d.introductions introductions,s.id sid,s.name sname,s.grade grade
+        from direction d , students s
+        where d.id = s.pid and d.id=#{did}
+    </select>
+
+    <!--type属性 ，返回值的全限定类名，或类型别名-->
+    <resultMap id="DirectionStudent" type="Direction">
+        <result property="id" column="did"/>
+        <result property="name" column="dname"/>
+        <result property="introductions" column="introductions"/>
+        <!--
+        复杂属性 单独处理 对象 association 集合 collection
+        javaType：指定属性类型 因为集合中有泛型 因此使用ofType
+        -->
+        <collection property="students" ofType="Student">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+            <result property="grade" column="grade"/>
+        </collection>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,4 @@
+com\shi\pojo\Projects.class
+com\shi\dao\ProjectsMapper.class
+com\shi\utils\IDutils.class
+com\shi\utils\MybatisUtils.class

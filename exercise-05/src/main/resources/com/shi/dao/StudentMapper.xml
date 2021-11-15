@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shi.dao.StudentMapper">
+
+    <select id="getStudent" resultMap="StudentCourse">
+        select s.id sid,s.name sname,sc.sno sno,sc.cno cno,sc.grade grade
+        from students s,sc,course c
+        where sc.cno=c.id and sc.sno=s.id and s.id=#{sid}
+    </select>
+
+    <resultMap id="StudentCourse" type="Student">
+        <result property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <collection property="courses" ofType="Sc">
+            <result property="sno" column="sno"/>
+            <result property="cno" column="cno"/>
+            <result property="grade" column="grade"/>
+        </collection>
+    </resultMap>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--引入外部配置文件-->
+    <properties resource="db.properties"/>
+
+    <settings>
+        <!--标准日志工程-->
+        <setting name="logImpl" value="LOG4J"/>
+        <!--   是否开启自动驼峰命名规则映射     -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!--别名-->
+    <typeAliases>
+    <!--<typeAlias type="com.shi.pojo.User" alias="User"/>-->
+        <!--扫描实体包 默认别名就为这个类的类名，首字母小写（user）-->
+        <!--但可以在实体类的上方用注解指定别名 @Alias（）-->
+        <package name="com.shi.pojo"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper class="com.shi.dao.ProjectsMapper"/>
+    </mappers>
+
+</configuration>

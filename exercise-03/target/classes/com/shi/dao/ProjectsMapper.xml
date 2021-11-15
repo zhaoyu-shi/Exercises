@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shi.dao.ProjectsMapper">
+
+    <insert id="addProjects" parameterType="Projects">
+        insert into mybatis.projects
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="createStartTime != null">
+                createStartTime,
+            </if>
+            <if test="createEndTime != null">
+                createEndTime,
+            </if>
+            <if test="principal != null">
+                principal
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="createStartTime != null">
+                #{createStartTime},
+            </if>
+            <if test="createEndTime != null">
+                #{createEndTime},
+            </if>
+            <if test="principal != null">
+                #{principal}
+            </if>
+        </trim>
+
+    </insert>
+
+    <delete id="deleteProjects" parameterType="int">
+        delete from mybatis.projects
+        <where>
+            <if test="id != null">
+                id=#{id}
+            </if>
+        </where>
+    </delete>
+
+    <update id="upDateProjects" parameterType="int">
+        update mybatis.projects
+        <set>
+            <if test="principal != null">
+                principal=#{principal},
+            </if>
+            <if test="createEndTime != null">
+                createEndTime=#{createEndTime},
+            </if>
+             <if test="createStartTime != null">
+            name=#{createStartTime}
+            </if>
+            <if test="name != null">
+                name=#{name}
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+    <select id="getProjects" parameterType="Projects" resultType="Projects">
+        select * from mybatis.projects
+    </select>
+
+    <select id="getProjectsByTime" parameterType="Projects" resultType="Projects">
+        select * from mybatis.projects
+        <where>
+
+            <if test="StartTime != null">
+                AND createStartTime <![CDATA[>=]]> #{StartTime}
+            </if>
+            <if test="EndTime != null">
+                AND createEndTime <![CDATA[<=]]> #{EndTime}
+            </if>
+
+        </where>
+    </select>
+
+</mapper>
