@@ -9,9 +9,9 @@
 
     <import resource="spring-dao.xml"/>
 
-    <!--ref：Spring的依赖注入也叫控制反转-->
+    <!--ref：Spring的依赖注入也叫控制反转
     <bean id="direction" class="com.shi.dao.DirectionMapperImpl">
         <property name="sqlSession" ref="sqlSession"/>
-    </bean>
+    </bean>-->
 
 </beans>

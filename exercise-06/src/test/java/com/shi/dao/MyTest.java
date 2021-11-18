@@ -11,7 +11,7 @@ public class MyTest {
     @Test
     public void getStudent1(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        DirectionMapper directionMapper = context.getBean("direction", DirectionMapper.class);
+        DirectionMapper directionMapper = (DirectionMapper) context.getBean("directionMapper");
         Direction direction = directionMapper.getDirection(1);
         System.out.println(direction);
     }

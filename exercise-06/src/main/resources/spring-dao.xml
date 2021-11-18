@@ -25,10 +25,10 @@
         <property name="mapperLocations" value="classpath:com/shi/dao/DirectionMapper.xml"/>
     </bean>
 
-    <!--sqlSessionTemplate  <方式一固定>  -->
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <!--只能用构造器进行注入sqlSessionFactory 因为源码没有set方法-->
-        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    <!-- mapper批量扫描包，从mapper包中扫描出mapper接口，自动创建代理对象并且在spring容器中注册 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.shi.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
 </beans>
