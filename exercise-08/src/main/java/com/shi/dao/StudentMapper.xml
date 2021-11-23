@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shi.dao.StudentMapper">
+
+    <select id="getStudentByName" resultMap="studentDirection">
+        select s.id sid,s.name sname,s.grade sgrade,d.name dname,d.introductions dintroductions
+        from students s ,direction d
+        where s.name=#{name} and s.pid=d.id;
+    </select>
+
+    <resultMap id="studentDirection" type="student">
+        <result property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <result property="grade" column="sgrade"/>
+        <collection property="direction" ofType="direction">
+            <result property="name" column="dname"/>
+            <result property="introductions" column="dintroductions"/>
+        </collection>
+
+    </resultMap>
+
+</mapper>
