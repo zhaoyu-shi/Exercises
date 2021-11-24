@@ -14,10 +14,14 @@
         <result property="id" column="sid"/>
         <result property="name" column="sname"/>
         <result property="grade" column="sgrade"/>
-        <collection property="direction" ofType="direction">
+        <association property="direction" javaType="direction">
             <result property="name" column="dname"/>
             <result property="introductions" column="dintroductions"/>
-        </collection>
+        </association>
+<!--        <collection property="direction" ofType="direction">-->
+<!--            <result property="name" column="dname"/>-->
+<!--            <result property="introductions" column="dintroductions"/>-->
+<!--        </collection>-->
 
     </resultMap>
 
