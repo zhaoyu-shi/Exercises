@@ -18,10 +18,7 @@
             <result property="name" column="dname"/>
             <result property="introductions" column="dintroductions"/>
         </association>
-<!--        <collection property="direction" ofType="direction">-->
-<!--            <result property="name" column="dname"/>-->
-<!--            <result property="introductions" column="dintroductions"/>-->
-<!--        </collection>-->
+
 
     </resultMap>
 

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shi.address.dao.PeopleMapper">
+
+    <select id="getAllPeople" resultType="people">
+        select *
+        from ao.people
+        where uid=#{uid};
+    </select>
+
+    <select id="getSort" resultType="people">
+        select sort
+        from ao.people;
+    </select>
+
+    <insert id="addPeople" parameterType="people">
+        insert into ao.people (name, department, address, email, sex, telephone, iphone, unit, uid, sort)
+        values (#{name},#{department},#{address},#{email},#{sex},#{telephone},#{iphone},#{unit},#{uid},#{sort});
+        <!--<trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != ''">
+                name
+            </if>
+            <if test="department != ''">
+                ,department
+            </if>
+            <if test="address != ''">
+                ,address
+            </if>
+            <if test="email != ''">
+                ,email
+            </if>
+            <if test="sex != ''">
+                ,sex
+            </if>
+            <if test="telephone != ''">
+                ,telephone
+            </if>
+            <if test="iphone != ''">
+                ,iphone
+            </if>
+            <if test="unit != ''">
+                ,unit
+            </if>
+            <if test="uid != ''">
+                ,uid
+            </if>
+            <if test="sort != ''">
+                ,sort
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != ''">
+                ${name}
+            </if>
+            <if test="department != ''">
+                ,${department}
+            </if>
+            <if test="address != ''">
+               ,${address}
+            </if>
+            <if test="email != ''">
+                ,${email}
+            </if>
+            <if test="sex != ''">
+                ,${sex}
+            </if>
+            <if test="telephone != ''">
+               ,${telephone}
+            </if>
+            <if test="iphone != ''">
+                ,${iphone}
+            </if>
+            <if test="unit != ''">
+                ,${unit}
+            </if>
+            <if test="uid != ''">
+                ,${uid}
+            </if>
+            <if test="sort != ''">
+                ,${sort}
+            </if>
+        </trim>-->
+    </insert>
+
+</mapper>
