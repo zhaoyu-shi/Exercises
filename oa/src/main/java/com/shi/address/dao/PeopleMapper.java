@@ -4,6 +4,7 @@ import com.shi.address.pojo.People;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.rmi.server.UID;
 import java.util.List;
 import java.util.Map;
 
@@ -16,5 +17,7 @@ public interface PeopleMapper {
     List getSort(@Param("uid") int uid);
     //添加联系人
     int addPeople(Map map);
+    //删除联系人
+    int deletePeople(@Param("id") int id);
 
 }

@@ -18,6 +18,10 @@ public class PeopleServiceImpl implements PeopleService {
         return peopleMapper.getAllPeople(uid);
     }
 
+    public int deletePeople(int id) {
+        return peopleMapper.deletePeople(id);
+    }
+
     public int addPeople(Map map) {
         return peopleMapper.addPeople(map);
     }
@@ -25,4 +29,5 @@ public class PeopleServiceImpl implements PeopleService {
     public List getSort(int uid) {
         return peopleMapper.getSort(uid);
     }
+
 }

@@ -11,7 +11,7 @@
     </select>
 
     <select id="getSort" resultType="people">
-        select sort
+        select distinct sort
         from ao.people;
     </select>
 
@@ -84,5 +84,9 @@
             </if>
         </trim>-->
     </insert>
+
+    <delete id="deletePeople" parameterType="people">
+        delete from ao.people where id=#{id}
+    </delete>
 
 </mapper>

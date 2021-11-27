@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -23,25 +22,41 @@ public class UserController {
     private PeopleService peopleService;
 
     static User user;
+    static int uid;
+     // static  HttpSession session;
+    //
+    // public HttpSession allpeo(int uid){
+    //     List<People> allPeople = peopleService.getAllPeople(uid);
+    //     List sort = peopleService.getSort(uid);
+    //
+    //     session.setAttribute("sort",sort);
+    //     session.setAttribute("list",allPeople);
+    //     return session;
+    // }
 
     @RequestMapping("/login")
-    public String login(String name, String password, HttpSession session, Model model){
+    public String login(String name, String password, HttpSession session){
         String url = "error";
         /*System.out.println(name);
         System.out.println(password);*/
         user = userService.getUser(name);
 
         System.out.println(user);
-        int uid = user.getId();
+        uid = user.getId();
+        System.out.println(uid);
         if(user!=null){
             if(user.getPassword().equals(password)){
+                System.out.println("11");
                 url = "userManagement";
                 List<People> allPeople = peopleService.getAllPeople(uid);
+                // System.out.println(allPeople);
                 List sort = peopleService.getSort(uid);
-
+                 System.out.println(sort);
                 session.setAttribute("sort",sort);
                 // System.out.println(sort);
-                model.addAttribute("list",allPeople);
+                session.setAttribute("list",allPeople);
+
+                // System.out.println(allpeo(uid));
             }
         }
         return url;
@@ -54,12 +69,12 @@ public class UserController {
         map.put("password",password);
         map.put("slogan",slogan);
         userService.addUser(map);
-        return "redirect:login.jsp";
+        return "redirect:jsp/login.jsp";
     }
 
     @RequestMapping("/addPeople")
     public String addPeople(String name,String department,String address,String email,String sex,
-                            String telephone,String iphone,String unit,String sort){
+                            String telephone,String iphone,String unit,String sort, HttpSession session){
         HashMap map = new HashMap();
         map.put("name",name);
         map.put("department",department);
@@ -73,7 +88,29 @@ public class UserController {
         int userId = user.getId();
         map.put("uid",userId);
         peopleService.addPeople(map);
-        return "redirect:jsp/userManagement.jsp";
+
+        List<People> allPeople = peopleService.getAllPeople(uid);
+        System.out.println(allPeople);
+        List sort1 = peopleService.getSort(uid);
+        // System.out.println(sort1);
+        // session.setAttribute("sort",sort1);
+        // System.out.println(sort);
+        session.setAttribute("list",allPeople);
+
+        return "success";
+    }
+
+    @RequestMapping("/deletePeople")
+    public String deletePeople(int id , HttpSession session){
+        peopleService.deletePeople(id);
+        List<People> allPeople = peopleService.getAllPeople(uid);
+        System.out.println(allPeople);
+        List sort = peopleService.getSort(uid);
+        // System.out.println(sort);
+        // session.setAttribute("sort",sort);
+        // System.out.println(sort);
+        session.setAttribute("list",allPeople);
+        return "userManagement";
     }
 
 }

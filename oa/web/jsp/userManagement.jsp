@@ -13,6 +13,8 @@
     <title>用户管理</title>
     <link href="../css/style.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" language="JavaScript1.2" src="../js/util.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 </head>
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
@@ -67,21 +69,23 @@
         </tr>
     </table>
     <br>
-    <form method="post" action="/deletePeople">
+
         <table width="95%"  border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="td_page">      <div align="right">
-                    <input name="Submit" type="submit" class="buttonface02" value="添加联系人" onClick="javascript:windowOpen('jsp/addPeople.jsp','','',500,420,'no','yes','100','100')">
-                    <input name="Submit2" type="submit" class="buttonface02" value="删除所选联系人">
+                    <input name="Submit" type="button" class="buttonface02" value="添加联系人" onClick="javascript:windowOpen('jsp/addPeople.jsp','','',500,420,'no','yes','100','100')">
+<%--                    <input name="Submit2" type="submit" class="buttonface02" value="删除所选联系人">--%>
                 </div></td>
             </tr>
         </table>
+
         <table width="95%"  border="0" cellpadding="0" cellspacing="0" class="table02" align="center">
             <tr>
                 <td width="37%" align="right"><div align="left"></div></td>
                 <td width="63%" height="30" align="right"><img src="../images/1.gif" width="4" height="5" align="absmiddle"> 首页　 <img src="../images/2.gif" width="3" height="5" align="absmiddle"> 上一页　 <img src="../images/2-2.gif" width="3" height="5" align="absmiddle"> 下一页　 <img src="../images/3.gif" width="4" height="5" align="absmiddle"> 末页　　共 1 页 1 条记录</td>
             </tr>
         </table>
+    <form method="post" action="/deletePeople">
         <table width="95%" border="0" cellpadding="2" cellspacing="0" class="table01">
             <tr>
                 <td class="td_top"><input name="chk" type="checkbox" id="chk" onClick="selectAllByChk(chk,checkbox)" value="checkbox0"></td>
@@ -91,7 +95,9 @@
                 <td class="td_top">办公电话</td>
                 <td class="td_top">移动电话</td>
                 <td class="td_top">修改</td>
+                <td class="td_top">删除</td>
             </tr>
+
             <c:forEach var="people" items="${list}">
                 <tr>
                     <td class="td_02"><input type="checkbox" name="checkbox" value="checkbox"></td>
@@ -101,18 +107,11 @@
                     <td class="td_02">${people.telephone}</td>
                     <td class="td_02">${people.iphone}</td>
                     <td class="td_02"><a href="#" onClick="javascript:windowOpen('修改联系人.htm','','',500,420,'no','yes','100','100')">修改</a></td>
-                    <td class="td_02"><a href="javascript:void (0);" onClick="deletePeople(${people.id})">删除</a><td/>
+                    <td class="td_02"><button type="submit" class="btn btn-link" value="${people.id}" name="id">删除</button></td>
                 </tr>
             </c:forEach>
         </table>
     </form>
-    <script type="text/javascript">
-        function deletePeople(id) {
-            if(window.confirm("确定删除？")){
-                location.href="/deletePeople?id="+id;
-            }
-        }
-    </script>
 </center>
 </body>
 </html>

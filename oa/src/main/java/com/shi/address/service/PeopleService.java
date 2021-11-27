@@ -14,4 +14,7 @@ public interface PeopleService extends PeopleMapper {
     List getSort(@Param("uid") int uid);
     //添加联系人
     int addPeople(Map map);
+    //删除联系人
+    int deletePeople(@Param("id") int id);
+
 }
