@@ -18,75 +18,59 @@
     <insert id="addPeople" parameterType="people">
         insert into ao.people (name, department, address, email, sex, telephone, iphone, unit, uid, sort)
         values (#{name},#{department},#{address},#{email},#{sex},#{telephone},#{iphone},#{unit},#{uid},#{sort});
-        <!--<trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="name != ''">
-                name
-            </if>
-            <if test="department != ''">
-                ,department
-            </if>
-            <if test="address != ''">
-                ,address
-            </if>
-            <if test="email != ''">
-                ,email
-            </if>
-            <if test="sex != ''">
-                ,sex
-            </if>
-            <if test="telephone != ''">
-                ,telephone
-            </if>
-            <if test="iphone != ''">
-                ,iphone
-            </if>
-            <if test="unit != ''">
-                ,unit
-            </if>
-            <if test="uid != ''">
-                ,uid
-            </if>
-            <if test="sort != ''">
-                ,sort
-            </if>
-        </trim>
-
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="name != ''">
-                ${name}
-            </if>
-            <if test="department != ''">
-                ,${department}
-            </if>
-            <if test="address != ''">
-               ,${address}
-            </if>
-            <if test="email != ''">
-                ,${email}
-            </if>
-            <if test="sex != ''">
-                ,${sex}
-            </if>
-            <if test="telephone != ''">
-               ,${telephone}
-            </if>
-            <if test="iphone != ''">
-                ,${iphone}
-            </if>
-            <if test="unit != ''">
-                ,${unit}
-            </if>
-            <if test="uid != ''">
-                ,${uid}
-            </if>
-            <if test="sort != ''">
-                ,${sort}
-            </if>
-        </trim>-->
     </insert>
 
     <delete id="deletePeople" parameterType="people">
         delete from ao.people where id=#{id}
     </delete>
+
+    <select id="getPeopleById" resultType="people">
+        select *
+        from ao.people
+        where id=#{id};
+    </select>
+
+    <update id="revisePeople" parameterType="people">
+        update ao.people
+        set name = #{name}, department = #{department}, address = #{address}, email = #{email}, sex = #{sex}, telephone = #{telephone}, iphone = #{iphone}, unit = #{unit}, sort = #{sort}
+        where id = #{id};
+    </update>
+
+    <select id="getSomePeople" resultType="people">
+        select * from ao.people
+        <trim prefix="where" prefixOverrides="and |or " >
+            <if test="sort != null and sort != ''">
+                and sort = #{sort}
+            </if>
+            <if test="name != null  and name != ''">
+                and name = #{name}
+            </if>
+            <if test="unit != null and unit != ''">
+                and unit = #{unit}
+            </if>
+            <if test="department != null and department != ''">
+                and department = #{department}
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+        </trim>;
+    </select>
+
+    <select id="getAllCount" resultType="int">
+        select count(id)
+        from ao.people;
+    </select>
+    
+    <select id="getCurrentPagePeople" resultType="people">
+        select *
+        from ao.people limit #{pageStartIndex},#{pagePageSize};
+    </select>
 
 </mapper>

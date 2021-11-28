@@ -46,6 +46,9 @@
     <form class="form-signin" method="post" action="/login">
         <h2 class="form-signin-heading">请输入用户名：</h2>
         <label for="inputUserName" class="sr-only">UserName</label>
+        <input type="hidden" name="pageno" value="1">
+<%--        <input type="hidden" name="pageSize" value="3">--%>
+
         <input id="inputUserName" type="text" value="${uname}" name="name" class="form-control" placeholder="UserName" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" value="${password }" name="password" class="form-control" placeholder="Password" required>

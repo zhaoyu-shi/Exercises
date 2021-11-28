@@ -19,6 +19,9 @@
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <center>
+<form method="get" action="/getSomePeople">
+
+
 
     <table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
@@ -37,7 +40,7 @@
         <tr>
             <td width="10%" class="td_02">通&nbsp;&nbsp;讯&nbsp;&nbsp;组</td>
 
-                <td width="40%" class="td_02"><select name="select2" class="box" style="width:95% ">
+                <td width="40%" class="td_02"><select name="sort" class="box" style="width:95% ">
                     <c:forEach var="so" items="${sort}">
                         <option>${so.sort}</option>
                     </c:forEach>
@@ -45,29 +48,32 @@
                 </td>
 
             <td width="10%" class="td_02">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</td>
-            <td class="td_02"><input name="textfield3" type="text" class="input" style="width:95% "></td>
+            <td class="td_02"><input name="name" type="text" class="input" style="width:95% "></td>
         </tr>
         <tr>
             <td class="td_02">单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位</td>
-            <td class="td_02"><input name="textfield2" type="text" class="input" style="width:95% "></td>
+            <td class="td_02"><input name="unit" type="text" class="input" style="width:95% "></td>
             <td class="td_02">部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;门 </td>
-            <td class="td_02"><input name="textfield4" type="text" class="input" style="width:95% "></td>
+            <td class="td_02"><input name="department" type="text" class="input" style="width:95% "></td>
         </tr>
         <tr>
             <td class="td_02">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</td>
-            <td class="td_02"><select name="select3" class="box" style="width:95% ">
-                <option value="1">男</option>
-                <option value="0">女</option>
+            <td class="td_02"><select name="sex" class="box" style="width:95% ">
+                <option >男</option>
+                <option >女</option>
             </select></td>
             <td class="td_02">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件 </td>
-            <td class="td_02"><input name="textfield5" type="text" class="input" style="width:95% "></td>
+            <td class="td_02"><input name="email" type="text" class="input" style="width:95% "></td>
         </tr>
         <tr>
             <td class="td_02">家庭住址</td>
-            <td colspan="3" class="td_02"><input name="textfield6" type="text" class="input" style="width:89% ">      <input name="Submit3" type="submit" class="buttonface" value="  查询  ">
+            <td colspan="3" class="td_02"><input name="address" type="text" class="input" style="width:89% ">      <input name="Submit3" type="submit" class="buttonface" value="  查询  ">
             </td>
         </tr>
     </table>
+
+</form>
+
     <br>
 
         <table width="95%"  border="0" cellpadding="0" cellspacing="0">
@@ -82,10 +88,22 @@
         <table width="95%"  border="0" cellpadding="0" cellspacing="0" class="table02" align="center">
             <tr>
                 <td width="37%" align="right"><div align="left"></div></td>
-                <td width="63%" height="30" align="right"><img src="../images/1.gif" width="4" height="5" align="absmiddle"> 首页　 <img src="../images/2.gif" width="3" height="5" align="absmiddle"> 上一页　 <img src="../images/2-2.gif" width="3" height="5" align="absmiddle"> 下一页　 <img src="../images/3.gif" width="4" height="5" align="absmiddle"> 末页　　共 1 页 1 条记录</td>
+                <c:choose>
+                    <c:when test="${page.pageno == 1}">
+                        <td width="63%" height="30" align="right"><img src="../images/1.gif" width="4" height="5" align="absmiddle"> 首页　 <img src="../images/2.gif" width="3" height="5" align="absmiddle"> 上一页　<a href="/getPage?pageno=${page.pageno + 1}"> <img src="../images/2-2.gif" width="3" height="5" align="absmiddle"> 下一页</a>　<a href="/getPage?pageno=${page.totalPages}"> <img src="../images/3.gif" width="4" height="5" align="absmiddle"> 末页</a>　　当前是第 ${page.pageno}/${page.totalPages} 页  共 ${page.totalRows} 条记录</td>
+                    </c:when>
+                    <c:when test="${page.pageno == page.totalPages}">
+                        <td width="63%" height="30" align="right"> <a href="/getPage?pageno=1"> <img src="../images/1.gif" width="4" height="5" align="absmiddle"> 首页 </a>　<a href="/getPage?pageno=${page.pageno - 1}"> <img src="../images/2.gif" width="3" height="5" align="absmiddle"> 上一页　</a>  <img src="../images/2-2.gif" width="3" height="5" align="absmiddle"> 下一页  <img src="../images/3.gif" width="4" height="5" align="absmiddle"> 末页　　当前是第 ${page.pageno}/${page.totalPages} 页  共 ${page.totalRows} 条记录</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td width="63%" height="30" align="right"> <a href="/getPage?pageno=1"> <img src="../images/1.gif" width="4" height="5" align="absmiddle"> 首页 </a>　<a href="/getPage?pageno=${page.pageno - 1}"> <img src="../images/2.gif" width="3" height="5" align="absmiddle"> 上一页　</a> <a href="/getPage?pageno=${page.pageno + 1}"> <img src="../images/2-2.gif" width="3" height="5" align="absmiddle"> 下一页 </a>　<a href="/getPage?pageno=${page.totalPages}"> <img src="../images/3.gif" width="4" height="5" align="absmiddle"> 末页</a>　　当前是第 ${page.pageno}/${page.totalPages} 页  共 ${page.totalRows} 条记录</td>
+                    </c:otherwise>
+                </c:choose>
             </tr>
         </table>
-    <form method="post" action="/deletePeople">
+<form method="post" action="/revise">
+
+
         <table width="95%" border="0" cellpadding="2" cellspacing="0" class="table01">
             <tr>
                 <td class="td_top"><input name="chk" type="checkbox" id="chk" onClick="selectAllByChk(chk,checkbox)" value="checkbox0"></td>
@@ -98,7 +116,8 @@
                 <td class="td_top">删除</td>
             </tr>
 
-            <c:forEach var="people" items="${list}">
+            <c:forEach var="people" items="${page.datas}">
+
                 <tr>
                     <td class="td_02"><input type="checkbox" name="checkbox" value="checkbox"></td>
                     <td class="td_02"><a href="../person_manage/&#21592;&#24037;&#35814;&#32454;&#20449;&#24687;.htm">${people.name}</a></td>
@@ -106,12 +125,12 @@
                     <td class="td_02">${people.email}</td>
                     <td class="td_02">${people.telephone}</td>
                     <td class="td_02">${people.iphone}</td>
-                    <td class="td_02"><a href="#" onClick="javascript:windowOpen('修改联系人.htm','','',500,420,'no','yes','100','100')">修改</a></td>
-                    <td class="td_02"><button type="submit" class="btn btn-link" value="${people.id}" name="id">删除</button></td>
+                    <td class="td_02"><a class="btn btn-link" href="/toRevise?id=${people.id}">修改</a></td>
+                    <td class="td_02"><a class="btn btn-link" href="/deletePeople?id=${people.id}"> 删除</a></td>
                 </tr>
             </c:forEach>
         </table>
-    </form>
+</form>
 </center>
 </body>
 </html>

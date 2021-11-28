@@ -1,5 +1,6 @@
 package com.shi.address.controller;
 
+import com.shi.address.pojo.Page;
 import com.shi.address.pojo.People;
 import com.shi.address.pojo.User;
 import com.shi.address.service.PeopleService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -23,40 +25,21 @@ public class UserController {
 
     static User user;
     static int uid;
-     // static  HttpSession session;
-    //
-    // public HttpSession allpeo(int uid){
-    //     List<People> allPeople = peopleService.getAllPeople(uid);
-    //     List sort = peopleService.getSort(uid);
-    //
-    //     session.setAttribute("sort",sort);
-    //     session.setAttribute("list",allPeople);
-    //     return session;
-    // }
 
     @RequestMapping("/login")
-    public String login(String name, String password, HttpSession session){
+    public String login(String name, String password, int pageno, HttpSession session){
         String url = "error";
-        /*System.out.println(name);
-        System.out.println(password);*/
         user = userService.getUser(name);
 
         System.out.println(user);
         uid = user.getId();
-        System.out.println(uid);
         if(user!=null){
             if(user.getPassword().equals(password)){
-                System.out.println("11");
                 url = "userManagement";
-                List<People> allPeople = peopleService.getAllPeople(uid);
-                // System.out.println(allPeople);
                 List sort = peopleService.getSort(uid);
-                 System.out.println(sort);
                 session.setAttribute("sort",sort);
-                // System.out.println(sort);
-                session.setAttribute("list",allPeople);
-
-                // System.out.println(allpeo(uid));
+                Page<People> currentPage = peopleService.getCurrentPage(pageno, uid);
+                session.setAttribute("page",currentPage);
             }
         }
         return url;
@@ -73,43 +56,50 @@ public class UserController {
     }
 
     @RequestMapping("/addPeople")
-    public String addPeople(String name,String department,String address,String email,String sex,
-                            String telephone,String iphone,String unit,String sort, HttpSession session){
-        HashMap map = new HashMap();
-        map.put("name",name);
-        map.put("department",department);
-        map.put("address",address);
-        map.put("email",email);
-        map.put("sex",sex);
-        map.put("telephone",telephone);
-        map.put("iphone",iphone);
-        map.put("unit",unit);
-        map.put("sort",sort);
+    public String addPeople(People people,HttpSession session){
         int userId = user.getId();
-        map.put("uid",userId);
-        peopleService.addPeople(map);
-
-        List<People> allPeople = peopleService.getAllPeople(uid);
-        System.out.println(allPeople);
-        List sort1 = peopleService.getSort(uid);
-        // System.out.println(sort1);
-        // session.setAttribute("sort",sort1);
-        // System.out.println(sort);
-        session.setAttribute("list",allPeople);
-
+        people.setUid(userId);
+        peopleService.addPeople(people);
+        List sort = peopleService.getSort(uid);
+        session.setAttribute("sort",sort);
         return "success";
     }
 
     @RequestMapping("/deletePeople")
     public String deletePeople(int id , HttpSession session){
         peopleService.deletePeople(id);
-        List<People> allPeople = peopleService.getAllPeople(uid);
-        System.out.println(allPeople);
         List sort = peopleService.getSort(uid);
-        // System.out.println(sort);
-        // session.setAttribute("sort",sort);
-        // System.out.println(sort);
-        session.setAttribute("list",allPeople);
+        session.setAttribute("sort",sort);
+        return "userManagement";
+    }
+
+    @RequestMapping("/toRevise")
+    public String revise(int id,HttpSession session){
+        People peopleById = peopleService.getPeopleById(id);
+        session.setAttribute("peopleId",peopleById);
+        return "revisePeople";
+    }
+
+    @RequestMapping("/revisePeople")
+    public String revisePeople(People people, HttpSession session){
+        peopleService.revisePeople(people);
+        return "userManagement";
+    }
+
+    @RequestMapping("/getSomePeople")
+    public String getSomePeople(People people, HttpSession session){
+        System.out.println(people);
+        System.out.println(people.getDepartment().equals(""));
+        peopleService.getSomePeople(people);
+
+
+        return "userManagement";
+    }
+
+    @RequestMapping("/getPage")
+    public String page(int pageno,HttpSession session){
+        Page<People> currentPage = peopleService.getCurrentPage(pageno, uid);
+        session.setAttribute("page",currentPage);
         return "userManagement";
     }
 
