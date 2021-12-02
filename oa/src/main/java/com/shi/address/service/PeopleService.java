@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
 
-public interface PeopleService extends PeopleMapper{
+public interface PeopleService {
     //查询通讯录里全部联系人
     List<People> getAllPeople(int uid);
     //通讯组
@@ -22,7 +22,7 @@ public interface PeopleService extends PeopleMapper{
     //修改信息
     int revisePeople(People people);
     //按条件查询
-    List<People> getSomePeople(People people);
+    Page<People> getSomePeople(int pageno, int uid, People people);
     //查询当前页
     Page<People> getCurrentPage(int pageno, int uid);
 

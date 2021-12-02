@@ -1,7 +1,6 @@
 package com.shi.address.service;
 
 import com.shi.address.dao.PeopleMapper;
-import com.shi.address.dao.UserMapper;
 import com.shi.address.pojo.Page;
 import com.shi.address.pojo.People;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,38 @@ public class PeopleServiceImpl implements PeopleService {
         return peopleMapper.getSort(uid);
     }
 
-    public List<People> getSomePeople(People people) {
-        return peopleMapper.getSomePeople(people);
+    public Page<People> getSomePeople(int pageno, int uid, People people) {
+        System.out.println(people);
+        //因为数据库中是不存在page这个实体的，所以不能直接返回方法
+        Page<People> page = new Page();
+        //初始化当前页码
+        page.setPageno(pageno);
+        //初始化总记录数
+        int totalRows = peopleMapper.getAllCount(uid);
+        page.setTotalRows(totalRows);
+        //初始化totalPages
+        int totalPages ;
+        int pageSize = 3;
+        int pageStartIndex;
+        pageStartIndex = (pageno - 1)*pageSize;
+        page.setPageStartIndex(pageStartIndex);
+        page.setPageSize(pageSize);
+        if(totalRows % pageSize==0){
+            totalPages = totalRows / pageSize;
+        }else {
+            totalPages = totalRows / pageSize + 1;
+        }
+        page.setTotalPages(totalPages);
+        //初始化当前页所包含的数据
+        Map<Object,Object> map = new HashMap();
+        map.put("pageStartIndex",page.getPageStartIndex());
+        map.put("pagePageSize",page.getPageSize());
+        map.put("people",people);
+        System.out.println("people"+map.get(people));
+        List<People> datas = peopleMapper.getSomePeople(map);
+        System.out.println("data"+datas);
+        page.setDatas(datas);
+        return page;
     }
 
     public int revisePeople(People people) {
@@ -73,10 +102,6 @@ public class PeopleServiceImpl implements PeopleService {
 
     public int getAllCount(int uid) {
         return 0;
-    }
-
-    public List<People> getCurrentPagePeople(Map map) {
-        return null;
     }
 
 }

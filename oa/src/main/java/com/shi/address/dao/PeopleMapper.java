@@ -22,7 +22,7 @@ public interface PeopleMapper {
     //修改信息
     int revisePeople(People people);
     //按条件查询
-    List<People> getSomePeople(People people);
+    List<People> getSomePeople(Map<Object,Object> map);
     //总人数
     int getAllCount(int uid);
     //当前页内人员信息

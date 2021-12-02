@@ -12,6 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
     <title>添加联系人</title>
     <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="https://zhaoyushi.oss-cn-beijing.aliyuncs.com/img/IMG_2347(20210227-020611).JPG">
     <script type="text/javascript" language="JavaScript1.2" src="../js/util.js"></script>
 </head>
 

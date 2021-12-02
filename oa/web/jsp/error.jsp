@@ -1,33 +1,29 @@
 <%--
   Created by IntelliJ IDEA.
   User: 帅帅的小石头
-  Date: 2021/11/27
-  Time: 15:24
+  Date: 2021/12/2
+  Time: 17:33
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!doctype html>
 <html lang="zh-CN">
-    <script language="javascript">
+<script language="javascript">
 
-        var times=5;
+    var times=5;
 
-        function TimeClose()
-        {
-            window.setTimeout('TimeClose()', 1000);
+    function TimeClose()
+    {
+        window.setTimeout('TimeClose()', 1000);
 
-            time.innerHTML =times;
-            times--;
-            if (times==0){
-            window.close()
-        }
+        time.innerHTML =times;
+        times--;
 
-        }
+    }
 
 
 
-    </script>
+</script>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,7 +34,7 @@
     <link rel="icon" href="https://zhaoyushi.oss-cn-beijing.aliyuncs.com/img/IMG_2347(20210227-020611).JPG">
     <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/starter-template/">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>登录错误</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.24/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -58,7 +54,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <meta http-equiv="Refresh" content="5;url=login.jsp ">
+    <meta http-equiv="Refresh" content="5; url=jsp/login.jsp ">
 </head>
 
 <body onLoad="TimeClose();">
@@ -87,8 +83,8 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>您已操作成功！</h1>
-        <p class="lead">倒计时<div id="time" style="color:red;font-size:150px">10</div>秒后页面即将关闭！</p>
+        <h1>用户名或密码输入错误！</h1>
+        <p class="lead">倒计时<div id="time" style="color:red;font-size:150px">10</div>秒后页面即将重新跳转至登陆页面！</p>
     </div>
 
 </div><!-- /.container -->
@@ -104,3 +100,4 @@
 <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.24/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
+

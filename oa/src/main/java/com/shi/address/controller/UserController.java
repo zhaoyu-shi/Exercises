@@ -87,12 +87,12 @@ public class UserController {
     }
 
     @RequestMapping("/getSomePeople")
-    public String getSomePeople(People people, HttpSession session){
+    public String getSomePeople(int pageno, People people, HttpSession session){
         System.out.println(people);
-        System.out.println(people.getDepartment().equals(""));
-        peopleService.getSomePeople(people);
-
-
+        Page<People> currentPage = peopleService.getSomePeople(pageno, uid,people);
+        System.out.println("cp"+currentPage);
+        System.out.println("cpd"+currentPage.getDatas());
+        session.setAttribute("page",currentPage);
         return "userManagement";
     }
 

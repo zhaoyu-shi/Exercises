@@ -12,6 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
     <title>用户管理</title>
     <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="https://zhaoyushi.oss-cn-beijing.aliyuncs.com/img/IMG_2347(20210227-020611).JPG">
     <script type="text/javascript" language="JavaScript1.2" src="../js/util.js"></script>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -67,7 +68,10 @@
         </tr>
         <tr>
             <td class="td_02">家庭住址</td>
-            <td colspan="3" class="td_02"><input name="address" type="text" class="input" style="width:89% ">      <input name="Submit3" type="submit" class="buttonface" value="  查询  ">
+            <td colspan="3" class="td_02">
+                <input name="address" type="text" class="input" style="width:89% ">
+                <input type="hidden" name="pageno" value="1">
+                <input type="submit" class="buttonface" value="  查询  ">
             </td>
         </tr>
     </table>
