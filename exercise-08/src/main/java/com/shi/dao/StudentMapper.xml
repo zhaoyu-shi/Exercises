@@ -10,7 +10,7 @@
         where s.name=#{name} and s.pid=d.id;
     </select>
 
-    <resultMap id="studentDirection" type="student">
+    <resultMap id="studentDirection" type="com.shi.pojo.Student">
         <result property="id" column="sid"/>
         <result property="name" column="sname"/>
         <result property="grade" column="sgrade"/>

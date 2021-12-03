@@ -8,17 +8,22 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class MyTest {
     @Test
     public void test1(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        UserMapper userMapper = (UserMapper) context.getBean("userMapper");
-        User user = userMapper.getUser("zhaoyushi");
         PeopleMapper peopleMapper = (PeopleMapper) context.getBean("peopleMapper");
-        List<People> allPeople = peopleMapper.getAllPeople(1);
-        System.out.println(allPeople);
+        People people = new People();
+        people.setSort("同事");
+        HashMap map = new HashMap();
+        map.put("pageStartIndex",0);
+        map.put("pagePageSize",3);
+        map.put("people",people);
+        List somePeople = peopleMapper.getSomePeople(map);
+        System.out.println(somePeople);
         //System.out.println(user);
     }
 

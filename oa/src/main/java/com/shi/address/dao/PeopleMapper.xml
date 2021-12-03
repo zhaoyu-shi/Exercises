@@ -36,44 +36,40 @@
         where id = #{id};
     </update>
 
-    <select id="getSomePeople" parameterType="map" resultType="people">
+    <select id="getSomePeople" resultType="people">
         select * from ao.people
         <where>
-<!--            <if test="id != 0">-->
-<!--                `id`=#{id} and-->
-<!--            </if>-->
-            <if test="name!=null and name!=''">
-                `name`=#{people.name} and
-            </if>
-            <if test="unit != null and unit != ''">
-                `unit`=#{people.unit} and
-            </if>
-            <if test="department!=null and department!=''">
-                `department`=#{people.department} and
-            </if>
-            <if test="sex!=null and sex!=''">
-                `sex`=#{people.sex} and
-            </if>
-            <if test="email!=null and email!=''">
-                `email`=#{people.email} and
-            </if>
-            <if test="address!=null and address!=''">
-                `address`=#{people.address} and
-            </if>
-            <if test="telephone!=null and telephone!=''">
-                `telephone`=#{people.telephone} and
-            </if>
-            <if test="iphone!=null and iphone!=''">
-                `iphone`=#{people.iphone} and
-            </if>
-            <if test="sort!=null and sort!=''">
-                `sort`=#{people.sort} and
-            </if>
-<!--            <if test="uid!=0">-->
-<!--                `uid`=#{uid} and-->
-<!--            </if>-->
+            <choose>
+            <when test="people.sort!=null and people.sort!=''">
+                and `sort`=#{people.sort}
+            </when>
+            <when test="people.name!=null and people.name!=''">
+              and `name` = #{people.name}
+            </when>
+            <when test="people.unit != null and people.unit != ''">
+                and `unit`=#{people.unit}
+            </when>
+            <when test="people.department!=null and people.department!=''">
+                and `department`=#{people.department}
+            </when>
+            <when test="people.sex!=null and people.sex!=''">
+                and `sex`=#{people.sex}
+            </when>
+            <when test="people.email!=null and people.email!=''">
+                and `email`=#{people.email}
+            </when>
+            <when test="people.address!=null and people.address!=''">
+                and `address`=#{people.address}
+            </when>
+            <when test="people.uid!=0">
+                and `uid`=#{uid}
+            </when>
+<!--            <otherwise>-->
+<!--                1!=1;-->
+<!--            </otherwise>-->
+        </choose>
         </where>
-        limit #{pageStartIndex},#{pagePageSize}
+        limit #{pageStartIndex},#{pagePageSize};
     </select>
 
     <select id="getAllCount" resultType="int">

@@ -28,7 +28,7 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     public Page<People> getSomePeople(int pageno, int uid, People people) {
-        System.out.println(people);
+        System.out.println("=========="+people);
         //因为数据库中是不存在page这个实体的，所以不能直接返回方法
         Page<People> page = new Page();
         //初始化当前页码
@@ -54,7 +54,8 @@ public class PeopleServiceImpl implements PeopleService {
         map.put("pageStartIndex",page.getPageStartIndex());
         map.put("pagePageSize",page.getPageSize());
         map.put("people",people);
-        System.out.println("people"+map.get(people));
+        System.out.println(map.get("pageStartIndex"));
+        System.out.println("people---------"+map.get("people"));
         List<People> datas = peopleMapper.getSomePeople(map);
         System.out.println("data"+datas);
         page.setDatas(datas);

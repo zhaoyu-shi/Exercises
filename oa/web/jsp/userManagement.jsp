@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>用户管理</title>
     <link href="../css/style.css" rel="stylesheet" type="text/css">
     <link rel="icon" href="https://zhaoyushi.oss-cn-beijing.aliyuncs.com/img/IMG_2347(20210227-020611).JPG">
@@ -19,7 +19,7 @@
 </head>
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-<center>
+
 <form method="get" action="/getSomePeople">
 
 
@@ -135,7 +135,7 @@
             </c:forEach>
         </table>
 </form>
-</center>
+
 </body>
 </html>
 
