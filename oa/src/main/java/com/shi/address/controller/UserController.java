@@ -32,7 +32,7 @@ public class UserController {
     public String login(String name, String password, int pageno, HttpSession session){
         String url = "error";
         user = userService.getUser(name);
-
+        session.setAttribute("user",user);
         System.out.println(user);
         uid = user.getId();
         if(user!=null){

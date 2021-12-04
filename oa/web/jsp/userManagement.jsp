@@ -20,6 +20,8 @@
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
+
+
 <form method="get" action="/getSomePeople">
 
 
@@ -31,7 +33,8 @@
             <td height="30" valign="middle" background="../images/bg_03.gif"><font color="#FFFFFF">个人通讯录管理</font></td>
         </tr>
     </table>
-    <br>
+    <p class="text-center">用户：${user.name}<a href="/jsp/login.jsp">[退出]</a><br>Slogan：${user.slogan}</p>
+
     <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" class="table01">
         <tr>
             <td colspan="2" class="td_02"><SPAN class=td_title>通讯录查询</SPAN></td>
