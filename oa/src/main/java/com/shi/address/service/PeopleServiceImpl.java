@@ -27,39 +27,50 @@ public class PeopleServiceImpl implements PeopleService {
         return peopleMapper.getSort(uid);
     }
 
-    public Page<People> getSomePeople(int pageno, int uid, People people) {
-        System.out.println("=========="+people);
+    public Page<People> getSomePeople(int pageno, int uid, People people, int size) {
         //因为数据库中是不存在page这个实体的，所以不能直接返回方法
         Page<People> page = new Page();
-        //初始化当前页码
+        //初始化当前页码 一般为1
         page.setPageno(pageno);
-        //初始化总记录数
-        int totalRows = peopleMapper.getAllCount(uid);
-        page.setTotalRows(totalRows);
-        //初始化totalPages
-        int totalPages ;
+
+        //一页三条信息
         int pageSize = 3;
+        page.setPageSize(pageSize);
+
+        //一页中第一条信息的下标
         int pageStartIndex;
         pageStartIndex = (pageno - 1)*pageSize;
         page.setPageStartIndex(pageStartIndex);
-        page.setPageSize(pageSize);
+
+        //初始化当前页所包含的数据
+        Map<Object,Object> map = new HashMap();
+        map.put("pageStartIndex",page.getPageStartIndex());
+        map.put("pagePageSize",page.getPageSize());
+        map.put("people",people);
+        List<People> datas = peopleMapper.getSomePeople(map);
+        page.setDatas(datas);
+
+        //初始化总记录数
+        int totalRows = size;
+        System.out.println(totalRows);
+        page.setTotalRows(totalRows);
+
+        //初始化totalPages
+        int totalPages ;
         if(totalRows % pageSize==0){
             totalPages = totalRows / pageSize;
         }else {
             totalPages = totalRows / pageSize + 1;
         }
         page.setTotalPages(totalPages);
-        //初始化当前页所包含的数据
-        Map<Object,Object> map = new HashMap();
-        map.put("pageStartIndex",page.getPageStartIndex());
-        map.put("pagePageSize",page.getPageSize());
-        map.put("people",people);
-        System.out.println(map.get("pageStartIndex"));
-        System.out.println("people---------"+map.get("people"));
-        List<People> datas = peopleMapper.getSomePeople(map);
-        System.out.println("data"+datas);
-        page.setDatas(datas);
+
         return page;
+    }
+
+    public List<People> getsomePeopleNumber(People people) {
+        HashMap map = new HashMap();
+        map.put("people",people);
+        return peopleMapper.getsomePeopleNumber(map);
     }
 
     public int revisePeople(People people) {

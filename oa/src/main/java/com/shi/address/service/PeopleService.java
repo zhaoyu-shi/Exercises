@@ -22,7 +22,9 @@ public interface PeopleService {
     //修改信息
     int revisePeople(People people);
     //按条件查询
-    Page<People> getSomePeople(int pageno, int uid, People people);
+    Page<People> getSomePeople(int pageno, int uid, People people, int size);
+    //按条件查询获得的人数
+    List<People> getsomePeopleNumber(People people);
     //查询当前页
     Page<People> getCurrentPage(int pageno, int uid);
 

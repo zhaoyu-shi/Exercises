@@ -17,12 +17,12 @@ public class MyTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         PeopleMapper peopleMapper = (PeopleMapper) context.getBean("peopleMapper");
         People people = new People();
-        people.setSort("同事");
+        people.setName("石头");
         HashMap map = new HashMap();
-        map.put("pageStartIndex",0);
-        map.put("pagePageSize",3);
+        // map.put("pageStartIndex",0);
+        // map.put("pagePageSize",3);
         map.put("people",people);
-        List somePeople = peopleMapper.getSomePeople(map);
+        List somePeople = peopleMapper.getsomePeopleNumber(map);
         System.out.println(somePeople);
         //System.out.println(user);
     }

@@ -42,6 +42,7 @@
             <td width="10%" class="td_02">通&nbsp;&nbsp;讯&nbsp;&nbsp;组</td>
 
                 <td width="40%" class="td_02"><select name="sort" class="box" style="width:95% ">
+                    <option>-----请选择-----</option>
                     <c:forEach var="so" items="${sort}">
                         <option>${so.sort}</option>
                     </c:forEach>

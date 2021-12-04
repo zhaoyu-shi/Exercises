@@ -25,6 +25,8 @@ public class UserController {
 
     static User user;
     static int uid;
+    static int rows;
+    static int size;
 
     @RequestMapping("/login")
     public String login(String name, String password, int pageno, HttpSession session){
@@ -39,6 +41,7 @@ public class UserController {
                 List sort = peopleService.getSort(uid);
                 session.setAttribute("sort",sort);
                 Page<People> currentPage = peopleService.getCurrentPage(pageno, uid);
+                rows = currentPage.getTotalRows();
                 session.setAttribute("page",currentPage);
             }
         }
@@ -83,21 +86,39 @@ public class UserController {
     @RequestMapping("/revisePeople")
     public String revisePeople(People people, HttpSession session){
         peopleService.revisePeople(people);
+        List sort = peopleService.getSort(uid);
+        session.setAttribute("sort",sort);
         return "userManagement";
     }
 
     @RequestMapping("/getSomePeople")
     public String getSomePeople(int pageno, People people, HttpSession session){
-        System.out.println(people);
-        Page<People> currentPage = peopleService.getSomePeople(pageno, uid,people);
+        size = peopleService.getsomePeopleNumber(people).size();
+        Page<People> currentPage = peopleService.getSomePeople(pageno, uid,people,size);
+        List sort = peopleService.getSort(uid);
+        session.setAttribute("sort",sort);
+        session.setAttribute("people",people);
         session.setAttribute("page",currentPage);
+        System.out.println(currentPage);
         return "userManagement";
     }
 
     @RequestMapping("/getPage")
-    public String page(int pageno,HttpSession session){
-        Page<People> currentPage = peopleService.getCurrentPage(pageno, uid);
-        session.setAttribute("page",currentPage);
+    public String getPage(int pageno,HttpSession session){
+        if (size<rows){
+            // System.out.println("111");
+            People people = (People) session.getAttribute("people");
+            Page<People> somePeople = peopleService.getSomePeople(pageno, uid, people, size);
+            session.setAttribute("page",somePeople);
+        }else {
+            // System.out.println("222");
+            Page<People> currentPage = peopleService.getCurrentPage(pageno, uid);
+            session.setAttribute("page",currentPage);
+        }
+
+        List sort = peopleService.getSort(uid);
+        session.setAttribute("sort",sort);
+
         return "userManagement";
     }
 

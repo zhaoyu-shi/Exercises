@@ -58,7 +58,7 @@
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <a href="register.jsp" class="btn btn-primary btn-lg btn-block active" role="button">Sign up</a>
+        <a href="jsp/register.jsp" class="btn btn-primary btn-lg btn-block active" role="button">Sign up</a>
     </form>
 
 </div> <!-- /container -->
