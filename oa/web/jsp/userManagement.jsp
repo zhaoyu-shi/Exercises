@@ -128,7 +128,7 @@
 
                 <tr>
                     <td class="td_02"><input type="checkbox" name="checkbox" value="checkbox"></td>
-                    <td class="td_02"><a href="../person_manage/&#21592;&#24037;&#35814;&#32454;&#20449;&#24687;.htm">${people.name}</a></td>
+                    <td class="td_02">${people.name}</td>
                     <td class="td_02">${people.sort}</td>
                     <td class="td_02">${people.email}</td>
                     <td class="td_02">${people.telephone}</td>
