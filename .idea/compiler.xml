@@ -7,14 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="exercise-03" />
-        <module name="exercise-04" />
-        <module name="exercise-05" />
-        <module name="exercise-06" />
+        <module name="oa" />
+        <module name="exercises-02" />
         <module name="exercise-07" />
         <module name="exercise-08" />
-        <module name="exercises-02" />
-        <module name="oa" />
+        <module name="exercise-05" />
+        <module name="exercise-06" />
+        <module name="exercise-03" />
+        <module name="exercise-04" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

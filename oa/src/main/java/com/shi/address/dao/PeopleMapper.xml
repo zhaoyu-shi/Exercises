@@ -39,61 +39,55 @@
     <select id="getsomePeopleNumber" resultType="people">
         select * from ao.people
         <where>
-            <choose>
-                <when test="people.sort!=null and people.sort!='' and people.sort!='-----请选择-----'">
+                <if test="people.sort!=null and people.sort!='' and people.sort!='-----请选择-----'">
                     `sort`=#{people.sort}
-                </when>
-                <when test="people.name!=null and people.name!=''">
+                </if>
+                <if test="people.name!=null and people.name!=''">
                     and `name` = #{people.name}
-                </when>
-                <when test="people.unit != null and people.unit != ''">
+                </if>
+                <if test="people.unit != null and people.unit != ''">
                     and `unit`=#{people.unit}
-                </when>
-                <when test="people.department!=null and people.department!=''">
+                </if>
+                <if test="people.department!=null and people.department!=''">
                     and `department`=#{people.department}
-                </when>
-                <when test="people.sex!=null and people.sex!=''">
+                </if>
+                <if test="people.sex!=null and people.sex!=''">
                     and `sex`=#{people.sex}
-                </when>
-                <when test="people.email!=null and people.email!=''">
+                </if>
+                <if test="people.email!=null and people.email!=''">
                     and `email`=#{people.email}
-                </when>
-                <when test="people.address!=null and people.address!=''">
+                </if>
+                <if test="people.address!=null and people.address!=''">
                     and `address`=#{people.address}
-                </when>
-            </choose>
+                </if>
+
         </where>
     </select>
 
     <select id="getSomePeople" resultType="people">
         select * from ao.people
         <where>
-            <choose>
-            <when test="people.sort!=null and people.sort!='' and people.sort!='-----请选择-----'">
+            <if test="people.sort!=null and people.sort!='' and people.sort!='-----请选择-----'">
                 `sort`=#{people.sort}
-            </when>
-            <when test="people.name!=null and people.name!=''">
+            </if>
+            <if test="people.name!=null and people.name!=''">
               and `name` = #{people.name}
-            </when>
-            <when test="people.unit != null and people.unit != ''">
+            </if>
+            <if test="people.unit != null and people.unit != ''">
                 and `unit`=#{people.unit}
-            </when>
-            <when test="people.department!=null and people.department!=''">
+            </if>
+            <if test="people.department!=null and people.department!=''">
                 and `department`=#{people.department}
-            </when>
-            <when test="people.sex!=null and people.sex!=''">
+            </if>
+            <if test="people.sex!=null and people.sex!=''">
                 and `sex`=#{people.sex}
-            </when>
-            <when test="people.email!=null and people.email!=''">
+            </if>
+            <if test="people.email!=null and people.email!=''">
                 and `email`=#{people.email}
-            </when>
-            <when test="people.address!=null and people.address!=''">
+            </if>
+            <if test="people.address!=null and people.address!=''">
                 and `address`=#{people.address}
-            </when>
-<!--            <otherwise>-->
-<!--                1!=1;-->
-<!--            </otherwise>-->
-        </choose>
+            </if>
         </where>
          limit #{pageStartIndex},#{pagePageSize}
     </select>

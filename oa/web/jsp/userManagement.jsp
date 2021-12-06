@@ -116,6 +116,7 @@
             <tr>
                 <td class="td_top"><input name="chk" type="checkbox" id="chk" onClick="selectAllByChk(chk,checkbox)" value="checkbox0"></td>
                 <td class="td_top">联系人</td>
+                <td class="td_top">性别</td>
                 <td class="td_top">通讯组</td>
                 <td class="td_top">E-mail</td>
                 <td class="td_top">办公电话</td>
@@ -129,11 +130,12 @@
                 <tr>
                     <td class="td_02"><input type="checkbox" name="checkbox" value="checkbox"></td>
                     <td class="td_02">${people.name}</td>
+                    <td class="td_02">${people.sex}</td>
                     <td class="td_02">${people.sort}</td>
                     <td class="td_02">${people.email}</td>
                     <td class="td_02">${people.telephone}</td>
                     <td class="td_02">${people.iphone}</td>
-                    <td class="td_02"><a class="btn btn-link" href="/toRevise?id=${people.id}">修改</a></td>
+                    <td class="td_02"><a href="#" onClick="javascript:windowOpen('/toRevise?id=${people.id}','','',500,420,'no','yes','100','100')">修改</a></td>
                     <td class="td_02"><a class="btn btn-link" href="/deletePeople?id=${people.id}"> 删除</a></td>
                 </tr>
             </c:forEach>
