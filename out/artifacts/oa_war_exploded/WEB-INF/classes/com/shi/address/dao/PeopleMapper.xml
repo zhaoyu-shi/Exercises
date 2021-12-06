@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shi.address.dao.PeopleMapper">
+
+    <select id="getAllPeople" resultType="people">
+        select *
+        from ao.people
+        where uid=#{uid};
+    </select>
+
+    <select id="getSort" resultType="people">
+        select distinct sort
+        from ao.people;
+    </select>
+
+    <insert id="addPeople" parameterType="people">
+        insert into ao.people (name, department, address, email, sex, telephone, iphone, unit, uid, sort)
+        values (#{name},#{department},#{address},#{email},#{sex},#{telephone},#{iphone},#{unit},#{uid},#{sort});
+    </insert>
+
+    <delete id="deletePeople" parameterType="people">
+        delete from ao.people where id=#{id}
+    </delete>
+
+    <select id="getPeopleById" resultType="people">
+        select *
+        from ao.people
+        where id=#{id};
+    </select>
+
+    <update id="revisePeople" parameterType="people">
+        update ao.people
+        set name = #{name}, department = #{department}, address = #{address}, email = #{email}, sex = #{sex}, telephone = #{telephone}, iphone = #{iphone}, unit = #{unit}, sort = #{sort}
+        where id = #{id};
+    </update>
+
+    <select id="getsomePeopleNumber" resultType="people">
+        select * from ao.people
+        <where>
+            <choose>
+                <when test="people.sort!=null and people.sort!='' and people.sort!='-----请选择-----'">
+                    `sort`=#{people.sort}
+                </when>
+                <when test="people.name!=null and people.name!=''">
+                    and `name` = #{people.name}
+                </when>
+                <when test="people.unit != null and people.unit != ''">
+                    and `unit`=#{people.unit}
+                </when>
+                <when test="people.department!=null and people.department!=''">
+                    and `department`=#{people.department}
+                </when>
+                <when test="people.sex!=null and people.sex!=''">
+                    and `sex`=#{people.sex}
+                </when>
+                <when test="people.email!=null and people.email!=''">
+                    and `email`=#{people.email}
+                </when>
+                <when test="people.address!=null and people.address!=''">
+                    and `address`=#{people.address}
+                </when>
+            </choose>
+        </where>
+    </select>
+
+    <select id="getSomePeople" resultType="people">
+        select * from ao.people
+        <where>
+            <choose>
+            <when test="people.sort!=null and people.sort!='' and people.sort!='-----请选择-----'">
+                `sort`=#{people.sort}
+            </when>
+            <when test="people.name!=null and people.name!=''">
+              and `name` = #{people.name}
+            </when>
+            <when test="people.unit != null and people.unit != ''">
+                and `unit`=#{people.unit}
+            </when>
+            <when test="people.department!=null and people.department!=''">
+                and `department`=#{people.department}
+            </when>
+            <when test="people.sex!=null and people.sex!=''">
+                and `sex`=#{people.sex}
+            </when>
+            <when test="people.email!=null and people.email!=''">
+                and `email`=#{people.email}
+            </when>
+            <when test="people.address!=null and people.address!=''">
+                and `address`=#{people.address}
+            </when>
+<!--            <otherwise>-->
+<!--                1!=1;-->
+<!--            </otherwise>-->
+        </choose>
+        </where>
+         limit #{pageStartIndex},#{pagePageSize}
+    </select>
+
+    <select id="getAllCount" resultType="int">
+        select count(id)
+        from ao.people;
+    </select>
+    
+    <select id="getCurrentPagePeople" resultType="people">
+        select *
+        from ao.people limit #{pageStartIndex},#{pagePageSize};
+    </select>
+
+</mapper>
